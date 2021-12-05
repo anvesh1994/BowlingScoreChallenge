@@ -17,14 +17,14 @@ public class BowlingScoreCalculator {
 				Bowling bowling = new Bowling();
 				bowling.setIndex(i);
 				System.out.printf("%n*** Frame %d ***", i);
-				System.out.print("\nEnter result first  bowl: ");
+				System.out.print("\nEnter result of first roll: ");
 				int firstRoll = scanner.nextInt();
 				if (firstRoll >= 10) {
 					bowling.setFirstRoll(firstRoll);
 					bowling.setScore(firstRoll);
 					handlingException(bowling);
 				} else {
-					System.out.print("Enter result second bowl: ");
+					System.out.print("Enter result of second roll: ");
 					int secondRoll = scanner.nextInt();
 					bowling.setFirstRoll(firstRoll);
 					bowling.setSecondRoll(secondRoll);
@@ -36,15 +36,15 @@ public class BowlingScoreCalculator {
 				if (i == 10 && lst.get(i - 1).getScore() == 10) {
 					Bowling tenth_bowling = lst.get(i - 1);
 					if (tenth_bowling.getFirstRoll() == 10) {
-						System.out.print("\nEnter result second bowl: ");
+						System.out.print("\nEnter result of second roll: ");
 						int tenth_second_roll = scanner.nextInt();
-						System.out.print("\nEnter result third bowl: ");
+						System.out.print("\nEnter result of third roll: ");
 						bowling.setSecondRoll(tenth_second_roll);
 						int tenth_third_roll = scanner.nextInt();
 						bowling.setThirdRoll(tenth_third_roll);
 						bowling.setScore(tenth_bowling.getFirstRoll() + tenth_second_roll + tenth_third_roll);
 					} else {
-						System.out.print("\nEnter result third bowl: ");
+						System.out.print("\nEnter result of third roll: ");
 						int tenth_third_roll = scanner.nextInt();
 						int score = tenth_bowling.getScore();
 						bowling.setThirdRoll(tenth_third_roll);
@@ -69,11 +69,11 @@ public class BowlingScoreCalculator {
 
 	public static void handlingException(Bowling bowling) {
 		if (bowling.getFirstRoll() > 10) {
-			throw new RuntimeException("invalid first ball entry");
+			throw new RuntimeException("invalid first roll entry");
 		} else if (bowling.getSecondRoll() > 10) {
-			throw new RuntimeException("invalid second ball entry");
+			throw new RuntimeException("invalid second roll entry");
 		} else if (bowling.getThirdRoll() > 10) {
-			throw new RuntimeException("invalid third ball entry");
+			throw new RuntimeException("invalid third roll entry");
 		} else if (bowling.getFirstRoll() + bowling.getSecondRoll() > 10) {
 			throw new RuntimeException("invalid inputs");
 		}
@@ -88,8 +88,8 @@ public class BowlingScoreCalculator {
 				if ((i + 1) >= 10) {
 					Bowling lastBowling = lst.get(lst.size() - 1);
 					if (lastBowling.getFirstRoll() == 10) {
-						finalScore += lastBowling.getFirstRoll();
 						finalScore += lastBowling.getSecondRoll();
+						finalScore += lastBowling.getThirdRoll();
 					}
 				} else {
 					Bowling firstNextBowling = lst.get(i + 1);
@@ -102,11 +102,21 @@ public class BowlingScoreCalculator {
 					if ((i + 1) == 10) {
 						finalScore += firstNextBowling.getSecondRoll();
 						finalScore += firstNextBowling.getThirdRoll();
-					} else {
-						Bowling secondNextBowling = lst.get((i + 2) - 1);
-						if (secondNextBowling.getFirstRoll() == 10)
+					} 
+					if((i+2) < 10) {
+						Bowling secondNextBowling = lst.get(i + 2);
+						if (firstNextBowling.getFirstRoll() == 10) {
 							finalScore += secondNextBowling.getFirstRoll();
+						}
 					}
+					else
+					{
+						Bowling secondNextBowling = lst.get(lst.size()-1);
+						if (firstNextBowling.getFirstRoll() == 10) {
+							finalScore += secondNextBowling.getFirstRoll();
+						}
+					}
+					
 				}
 			} else {
 				if ((bowling.getFirstRoll() + bowling.getSecondRoll()) == 10) {
@@ -121,6 +131,7 @@ public class BowlingScoreCalculator {
 					finalScore += bowling.getFirstRoll() + bowling.getSecondRoll();
 				}
 			}
+			System.out.println("Count"+ finalScore);
 		}
 		return finalScore;
 	}
