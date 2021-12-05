@@ -3,6 +3,8 @@
 
 Scoring Bowling
 Rolls 1 – 4 4 – 5 6 - / 5 - / X 0 – 1 7 - / 6 - / X 2 - / - 6
+
+
 Total score 5 14 29 49 60 61 77 97 117 133
 X = Strike / = Spare
 
