@@ -131,6 +131,7 @@ public class BowlingScoreCalculator {
 					finalScore += bowling.getFirstRoll() + bowling.getSecondRoll();
 				}
 			}
+			System.out.println("Count"+ finalScore);
 		}
 		return finalScore;
 	}
